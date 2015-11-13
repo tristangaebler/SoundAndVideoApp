@@ -55,14 +55,62 @@ public class SoundActivity extends Activity implements Runnable {
         });
 
         stopButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View currentView) {
+                soundPlayer.stop();
+                soundPlayer = MediaPlayer.create(getBaseContext(), R.raw.birdsound);
+            }
+        });
 
+        videoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View currentView) {
                 Intent myIntent = new Intent(currentView.getContext(), VideoActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });
+
+        soundBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+           @Override
+            public void onStopTrackingTouch(SeekBar seekBar){}
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                if (fromUser) {
+                    soundPlayer.seekTo(progress);
+                }
+            }
+        });
     }
+
+    /**
+     * We need this method since we are implemeting Runnable
+     * Allows the seekBar to update
+     *
+     */
+    public void run() {
+        int currentPosition = 0;
+        int soundTotal = soundPlayer.getDuration();
+        soundBar.setMax(soundTotal);
+
+        while (soundPlayer != null && currentPosition < soundTotal) {
+            try {
+                Thread.sleep(300);
+                currentPosition = soundPlayer.getCurrentPosition();
+            }
+            catch (InterruptedException soundException) {
+                return;
+            }
+            catch (Exception otherException) {
+                return;
+            }
+            soundBar.setProgress(currentPosition);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
