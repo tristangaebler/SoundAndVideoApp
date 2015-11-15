@@ -64,9 +64,12 @@ public class VideoActivity extends Activity {
 
     private void setUpListeners() {
         returnButton.setOnClickListener(new View.OnClickListener(){
-            Intent returnIntent = new Intent();
-            setResult(RESULT_OK, returnIntent);
-            finish();
+            @Override
+            public void onClick(View currentView) {
+                Intent returnIntent = new Intent();
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
         });
     }
 }
