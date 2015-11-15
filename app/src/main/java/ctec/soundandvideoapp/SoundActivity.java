@@ -44,6 +44,9 @@ public class SoundActivity extends Activity implements Runnable {
         soundThread.start();
     }
 
+    /**
+     * Method for the setUpListeners. This responds to the user interacting with the application
+     */
     private void setUpListeners() {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +150,9 @@ public class SoundActivity extends Activity implements Runnable {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method generates a random number. Depending on that number it plays a certain sound
+     */
     public void randomSound() {
         int random = (int) (Math.random() * 6);
 
