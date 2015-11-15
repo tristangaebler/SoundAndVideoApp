@@ -7,4 +7,5 @@
     <string name="videoButton">Watch the video</string>
     <string name="title_activity_video">VideoActivity</string>
     <string name="homeButton">Home</string>
+    <string name="randomButton">Random Sound</string>
 </resources>

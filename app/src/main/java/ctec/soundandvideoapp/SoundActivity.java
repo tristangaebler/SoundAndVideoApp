@@ -18,9 +18,11 @@ public class SoundActivity extends Activity implements Runnable {
     private Button stopButton;
     private Button pauseButton;
     private Button videoButton;
+    private Button randomSoundButton;
     private MediaPlayer soundPlayer;
     private SeekBar soundBar;
     private Thread soundThread;
+    private MediaPlayer kidlaughing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,11 @@ public class SoundActivity extends Activity implements Runnable {
         startButton = (Button) findViewById(R.id.playButton);
         pauseButton = (Button) findViewById(R.id.pauseButton);
         stopButton = (Button) findViewById(R.id.stopButton);
+        randomSoundButton = (Button) findViewById(R.id.randomSoundButton);
         soundBar = (SeekBar) findViewById(R.id.soundBar);
         videoButton = (Button) findViewById(R.id.videoButton);
         soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.birdsound);
+        kidlaughing = MediaPlayer.create(this.getBaseContext(), R.raw.kidlaughing);
 
         setUpListeners();
 
@@ -54,7 +58,7 @@ public class SoundActivity extends Activity implements Runnable {
             }
         });
 
-        stopButton.setOnClickListener(new View.OnClickListener(){
+        stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View currentView) {
                 soundPlayer.stop();
@@ -62,11 +66,18 @@ public class SoundActivity extends Activity implements Runnable {
             }
         });
 
-        videoButton.setOnClickListener(new View.OnClickListener(){
+        videoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View currentView) {
                 Intent myIntent = new Intent(currentView.getContext(), VideoActivity.class);
                 startActivityForResult(myIntent, 0);
+            }
+        });
+
+        randomSoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View currentView) {
+                randomSound();
             }
         });
 
@@ -84,6 +95,8 @@ public class SoundActivity extends Activity implements Runnable {
                 }
             }
         });
+
+
     }
 
     /**
@@ -132,5 +145,19 @@ public class SoundActivity extends Activity implements Runnable {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void randomSound() {
+        int random = (int) (Math.random() * 4);
+
+        if(random <= 1) {
+            soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lazer);
+        }
+        else if(random <= 2){
+            soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.siren);
+        }
+        else if(random <= 3) {
+            soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.kidlaughing);
+        }
     }
 }
