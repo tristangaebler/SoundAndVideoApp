@@ -28,7 +28,7 @@ public class VideoActivity extends Activity {
         myPlayer = (VideoView) findViewById(R.id.videoView);
         returnButton = (Button) findViewById(R.id.homeButton);
 
-        videoLocation = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.starWars);
+        videoLocation = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.starwars);
         myVideoController = new MediaController(this);
         //Prepare the video
         setUpMedia();

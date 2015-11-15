@@ -148,7 +148,7 @@ public class SoundActivity extends Activity implements Runnable {
     }
 
     public void randomSound() {
-        int random = (int) (Math.random() * 4);
+        int random = (int) (Math.random() * 6);
 
         if(random <= 1) {
             soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lazer);
@@ -158,6 +158,12 @@ public class SoundActivity extends Activity implements Runnable {
         }
         else if(random <= 3) {
             soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.kidlaughing);
+        }
+        else if(random <= 4) {
+            soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.motorcycle);
+        }
+        else if(random <= 5) {
+            soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.thunderstorm);
         }
     }
 }
